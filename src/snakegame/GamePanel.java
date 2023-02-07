@@ -20,11 +20,12 @@ public class GamePanel extends JPanel implements ActionListener{
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH * SCREEN_HEIGHT) / UNIT_SIZE;
-    static final int DELAY = 75;
+    static final int DELAY = 90;
     final int x[] = new int[GAME_UNITS];
     final int y[] = new int[GAME_UNITS];
     int bodyParts = 6;
     int applesEaten;
+    int topScore = 0;
     int appleX;
     int appleY;
     char direction = 'R';
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel implements ActionListener{
     }
     public void draw(Graphics g){
         score(g);
+        topScore(g);
         if (running){
             // grid lines for testing
             /*
@@ -108,6 +110,9 @@ public class GamePanel extends JPanel implements ActionListener{
         if (x[0] == appleX && y[0] == appleY){
             bodyParts++;
             applesEaten++;
+            if (applesEaten > topScore){
+                topScore = applesEaten;
+            }
             newApple();
         }
     }
@@ -139,6 +144,14 @@ public class GamePanel extends JPanel implements ActionListener{
         g.setFont(new Font("Ink Free", Font.BOLD, 40));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("Score: " + applesEaten, (SCREEN_WIDTH - metrics.stringWidth("Score: " + applesEaten)) / 2, g.getFont().getSize());
+    }
+    
+    public void topScore(Graphics g){
+        //top score screen
+        g.setColor(Color.blue);
+        g.setFont(new Font("Ink Free", Font.BOLD, 20));
+        FontMetrics metrics = getFontMetrics(g.getFont());
+        g.drawString("Top Score: " + topScore, (SCREEN_WIDTH - metrics.stringWidth("Top Score: " + topScore)) / 2, g.getFont().getSize() * 4);
     }
     
     public void gameOver(Graphics g){
