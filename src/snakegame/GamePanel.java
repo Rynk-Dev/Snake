@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author USer
+ * @author Ryan
  */
 public class GamePanel extends JPanel implements ActionListener{
     
@@ -42,6 +42,7 @@ public class GamePanel extends JPanel implements ActionListener{
         this.addKeyListener(new MyKeyAdapter());
         startGame();
     }
+    
     public void startGame(){
         newApple();
         running = true;
@@ -53,6 +54,7 @@ public class GamePanel extends JPanel implements ActionListener{
         super.paintComponent(g);
         draw(g);
     }
+    
     public void draw(Graphics g){
         if (running){
             g.setColor(Color.red);
@@ -78,6 +80,7 @@ public class GamePanel extends JPanel implements ActionListener{
         score(g);
         topScore(g);
     }
+    
     public void newApple(){
         //create apple that isn't inside snake's body
         boolean validApple = false;
@@ -88,14 +91,13 @@ public class GamePanel extends JPanel implements ActionListener{
                 validApple = !(x[i] == appleX && y[i] == appleY);
             }
         } while (!validApple);
-        
     }
+    
     public void move(){
         for (int i = bodyParts; i>0; i--){
             x[i] = x[i-1];
             y[i] = y[i-1];
         }
-        
         switch(direction) {
             case 'U':
                 y[0] = y[0] - UNIT_SIZE;
@@ -111,6 +113,7 @@ public class GamePanel extends JPanel implements ActionListener{
                 break;
         }
     }
+    
     public void checkApple(){
         if (x[0] == appleX && y[0] == appleY){
             bodyParts++;
@@ -121,6 +124,7 @@ public class GamePanel extends JPanel implements ActionListener{
             newApple();
         }
     }
+    
     public void checkCollisions(){
         //check for head - body collision
         for (int i = bodyParts; i > 0; i--){
@@ -164,7 +168,6 @@ public class GamePanel extends JPanel implements ActionListener{
         g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
         g.drawString("Enter to Restart", (SCREEN_WIDTH - metrics.stringWidth("Enter to Restart")) / 2, SCREEN_HEIGHT * 3 / 4);
     }
-    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (running) {
@@ -184,7 +187,6 @@ public class GamePanel extends JPanel implements ActionListener{
         direction = 'R';
         x = new int[GAME_UNITS];
         y = new int[GAME_UNITS];
-
     }
     
     public class MyKeyAdapter extends KeyAdapter{

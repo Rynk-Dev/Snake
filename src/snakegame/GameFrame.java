@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author USer
+ * @author Ryan
  */
 public class GameFrame extends JFrame{
     GameFrame(){
