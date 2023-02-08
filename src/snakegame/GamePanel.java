@@ -79,8 +79,16 @@ public class GamePanel extends JPanel implements ActionListener{
         topScore(g);
     }
     public void newApple(){
-        appleX = random.nextInt((int)(SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
-        appleY = random.nextInt((int)(SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+        //create apple that isn't inside snake's body
+        boolean validApple = false;
+        do {
+            appleX = random.nextInt((int)(SCREEN_WIDTH / UNIT_SIZE)) * UNIT_SIZE;
+            appleY = random.nextInt((int)(SCREEN_HEIGHT / UNIT_SIZE)) * UNIT_SIZE;
+            for (int i = 0; i < bodyParts; i++){
+                validApple = !(x[i] == appleX && y[i] == appleY);
+            }
+        } while (!validApple);
+        
     }
     public void move(){
         for (int i = bodyParts; i>0; i--){
@@ -151,7 +159,7 @@ public class GamePanel extends JPanel implements ActionListener{
         
         //game over screen
         g.setColor(Color.red);
-        g.setFont(new Font("Ink Free", Font.BOLD, 75));
+        g.setFont(new Font("Ink Free", Font.BOLD, 70));
         FontMetrics metrics = getFontMetrics(g.getFont());
         g.drawString("Game Over", (SCREEN_WIDTH - metrics.stringWidth("Game Over")) / 2, SCREEN_HEIGHT / 2);
         g.drawString("Enter to Restart", (SCREEN_WIDTH - metrics.stringWidth("Enter to Restart")) / 2, SCREEN_HEIGHT * 3 / 4);
