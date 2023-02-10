@@ -17,6 +17,9 @@ The base project for a functioning snake game is from the <a href="https://www.y
     I have prevented the apple from spawning inside the body of the snake.
   </li>
 </ul>
+
+<!---->
+
 ## What I am learning
 As of the time of this project, I am a 2nd term Information and Computer Systems student.
 We have just begun looking at Java Swing and Git.
@@ -25,5 +28,5 @@ Courses relevant to the project are:
   <dt>Software Engineering Process</dt>
   <dd>Where I am learning Java Swing and git.</dd>
   <dt>Algorithms and Data Structures.</dt>
-  <dd>Where I am developing further knowledge on OOP and Java</dd>
+  <dd>Where I am developing further knowledge on OOP and Java.</dd>
 </dl>
